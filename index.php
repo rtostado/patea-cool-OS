@@ -1,34 +1,47 @@
 <?php
-
-	$ctrl;
-
+$ctrl="";
+if(isset($_GET["ctrl"])){
 	switch ($_REQUEST['ctrl']) {
-		case 'Ciudadano':
-			require 'controllers/CiudadanoCtrl.php';
-			$ctrl = new CiudadanoCtrl();
-			break;
-		case 'Bancodeideas':
-			require 'controllers/BancodeideasCtlr.php';
-			$ctrl = new Bancodeideas();
-			break;
-		case 'Colonia':
-			require 'controllers/ColoniaCtlr.php';
-			$ctrl = new Colonia();
-			break;
-		case 'Distrito':
-			require 'controllers/DistritoCtlr.php';
-			$ctrl = new Distrito();
-			break;
-		case 'Zona':
-			require 'controllers/ZonaCtlr.php';
-			$ctrl = new Zona();
-			break;
-		case 'Status':
-			require 'controllers/StatusCtlr.php';
-			$ctrl = new Status();
-			break;	
-		default:
-			break;
+	case 'usuario':
+		require 'Controlador/CiudadanoCtrl.php';
+		$ctrl = new CiudadanoCtrl();
+		break;
+	case 'accion':
+		require 'Controlador/AccionSocialCtrl.php';
+		$ctrl = new AccionSocialCtrl();
+		break;
+	case 'tipoAccion':
+		require 'Controlador/TipoAccionSocialCtrl.php';
+		$ctrl= new TipoAccionSocialCtrl();
+		break;
+	case 'bancoIdea':
+		require 'Controlador/BancoIdeasCtrl.php';
+		$ctrl = new BancoIdeasCtrl();
+		break;
+	case 'colonia':
+		require 'Controlador/ColoniaCtrl.php';
+		$ctrl = new ColoniaCtrl();
+		break;
+	case 'distrito':
+		require 'Controlador/DistritoCtrl.php';
+		$ctrl = new DistritoCtrl();
+		break;	
+	case 'status':
+		require 'Controlador/StatusCtrl.php';
+		$ctrl = new StatusCtrl();
+		break;
+	case 'zona':
+		require 'Controlador/ZonaCtrl';
+		$ctrl = new ZonaCtrl();
+		break;
+	default:
+		echo "No hay parametros validos";
+		break;
 	}
 	
-	$ctrl->run();
+	$ctrl -> run();
+}else{
+	echo "No hay parametros";
+}
+	
+?>
