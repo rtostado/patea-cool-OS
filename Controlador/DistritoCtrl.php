@@ -47,7 +47,8 @@ class DistritoCtrl{
 	
 	public function Eliminar()
 	{
-		
+		$distritoId	= $this->valida->validaID($_POST['distritoId']);
+		$resultado 	= $this->modelo->Eliminar($distritoId);
 	}
 	
 	public function Modificar()

@@ -11,7 +11,7 @@ if(isset($_GET["ctrl"])){
 		$ctrl = new AccionSocialCtrl();
 		break;
 	case 'tipoAccion':
-		require 'Controlador/TipoAccionSocialCtrl.php';
+		require 'Controlador/TIpoAccionSocialCtrl.php';
 		$ctrl= new TipoAccionSocialCtrl();
 		break;
 	case 'bancoIdea':
@@ -31,7 +31,7 @@ if(isset($_GET["ctrl"])){
 		$ctrl = new StatusCtrl();
 		break;
 	case 'zona':
-		require 'Controlador/ZonaCtrl';
+		require 'Controlador/ZonaCtrl.php';
 		$ctrl = new ZonaCtrl();
 		break;
 	default:

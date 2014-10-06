@@ -14,29 +14,48 @@ class TipoAccionSocialCtrl{
 	//se inicia la ejecucion del
 	function run(){
 		switch ($_POST['act']) {
-			case 'crear':
-				$this->crear();				
+			case 'Insertar':
+				$this->Insertar();				
 				break;
-			
-			default:
-				
+			case 'Eliminar':
+				$this->Eliminar();
+				break;
+			case 'Modificar':
+				$this->Modificar();
+				break;
+			default:				
 				break;
 		}
 	}
 	
 	//se asigna a cada variable su valor correcto (ya validado)
-	private function crear()
+	private function Insertar()
 	{
-		$ID=5;	//ejemplo
+		//$ID=5;	//ejemplo
+		$ID 			  = $this->valida->ValidaID($_POST['ID']);
 		$tipoAccionSocial = $this->valida->ValidaTexto($_POST['tipoAccionSocial']);
-		$resultado	= $this->modelo->crear($ID,$tipoAccionSocial);
+		
+		$resultado		  = $this->modelo->Insertar($ID,$tipoAccionSocial);
+		
 		if($resultado){
 			require 'vista/TipoAccionInsertada.php';	
-			$this -> modelo ->mostrar();
+			//$this -> modelo ->mostrar();
 		}
 		else {
 			require 'vista/Error.php';
 		}
 	}
+	
+	public function Eliminar()
+	{
+		$ID 		= $this->valida->ValidaID($_POST['ID']);
+		$resultado 	= $this->modelo->Eliminar($ID);
+	}
+	
+	public function Modificar()
+	{
+		
+	}
+	
 }
 ?>

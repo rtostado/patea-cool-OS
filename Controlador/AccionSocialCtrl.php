@@ -14,42 +14,52 @@ class AccionSocialCtrl{
 	//se inicia la ejecucion del
 	function run(){
 		switch ($_POST['act']) {
-			case 'crear':
-				$this->crear();				
+			case 'Insertar':
+				$this->Insertar();				
 				break;
-			case 'eliminar':
-				$this -> eliminar();
+			case 'Eliminar':
+				$this->Eliminar();
 				break;
-			case 'actualzar':
-				$this -> actualizar();
+			case 'Modificar':
+				$this->Modificar();
 				break;
-			
-			default:
-				
+			default:				
 				break;
 		}
 	}
 	//se asigna a cada variable su valor correcto (ya validado)
-	private function crear()
+	private function Insertar()
 	{
-		$ID=5; //ejemplo
-		$calificacion=10;//ejemplo
-		$numParticipantes=111;//ejemplo
-		$status="terminado";//ejemplo
-		$nombre		= $this->valida->ValidaNombre($_POST['nombre']);
-		$descripcion	= $this->valida->ValidaTexto($_POST['descripcion']);
-		$fechaInicio	= $this->valida->ValidaFecha($_POST['fechaInicio']);
-		$fechaFin	= $this->valida->ValidaFecha($_POST['fechaFin']);
+		$ID					= $this->valida->ValidaID($_POST['ID']); //ejemplo
+		$calificacion 	  	= $this->valida->ValidaID($_POST['calificacion']);
+		$numParticipantes 	= $this->valida->ValidaID($_POST['numParticipantes']);
+		$status 		  	= $this->valida->ValidaTexto($_POST['status']);
+		$nombre			  	= $this->valida->ValidaNombre($_POST['nombre']);
+		$descripcion	  	= $this->valida->ValidaTexto($_POST['descripcion']);
+		$fechaInicio	  	= $this->valida->ValidaFecha($_POST['fechaInicio']);
+		$fechaFin		  	= $this->valida->ValidaFecha($_POST['fechaFin']);
+		$tipoaccionsocialId = $this->valida->ValidaID($_POST['tipoaccionsocialId']);
 		
-		$resultado	= $this->modelo->crear($ID,$nombre,$fechaInicio,$fechaFin,
-											$descripcion,$calificacion,$numParticipantes,$status);
+		$resultado	= $this->modelo->Insertar($ID,$nombre,$fechaInicio,$fechaFin,
+											$descripcion,$calificacion,$numParticipantes,$status,$tipoaccionsocialId);
 		
 		if($resultado){
 			require 'vista/AccionInsertada.php';
-			$this->modelo->mostrar();
+			//$this->modelo->mostrar();
 		}
 		else {
 			require 'vista/Error.php';
 		}
+	}
+	
+	public function Eliminar()
+	{
+		$ID			= $this->valida->ValidaID($_POST['ID']);
+		$resultado 	= $this->modelo->Eliminar($ID);
+	}
+	
+	public function Modificar()
+	{
+		
 	}
 }

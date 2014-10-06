@@ -15,30 +15,48 @@ class BancoIdeasCtrl{
 	//se inicia la ejecucion del
 	function run(){
 		switch ($_POST['act']) {
-			case 'crear':
-				$this->crear();				
+			case 'Insertar':
+				$this->Insertar();				
 				break;
-			
-			default:
-				
+			case 'Eliminar':
+				$this->Eliminar();
+				break;
+			case 'Modificar':
+				$this->Modificar();
+				break;
+			default:				
 				break;
 		}
 	}
 	
 	//se asigna a cada variable su valor correcto (ya validado)
-	private function crear()
+	private function Insertar()
 	{
-		$status="planeacion";//ejemplo
-		$nombre	= $this->valida->ValidaNombre($_POST['nombre']);
-		$descripcion	= $this->valida->ValidaTexto($_POST['descripcion']);		
-		$resultado	= $this->modelo->crear($nombre,$descripcion,$status);
+		//$status					  = $this->valida->ValidaTexto($_POST['status']);//ejemplo
+		$nombre					  = $this->valida->ValidaNombre($_POST['nombre']);
+		$descripcion	 		  = $this->valida->ValidaTexto($_POST['descripcion']);
+		$ciudadano_num_afiliacion = $this->valida->ValidaID($_POST['ciudadano_num_afiliacion']);
+		
+		$resultado	= $this->modelo->Insertar($nombre,$descripcion,/*$status,*/$ciudadano_num_afiliacion);
 		
 		if($resultado){
 			require 'Vista/IdeaInsertada.php';
-			$this->modelo->mostrar();
+			//$this->modelo->mostrar();
 		}
 		else {
 			require 'Vista/Error.php';
 		}
 	}
+
+	public function Eliminar()
+	{
+		$ciudadano_num_afiliacion = $this->valida->ValidaID($_POST['ciudadano_num_afiliacion']);
+		$resultado 	= $this->modelo->Eliminar($ciudadano_num_afiliacion);
+	}
+	
+	public function Modificar()
+	{
+		
+	}
+	
 }

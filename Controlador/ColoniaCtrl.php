@@ -33,10 +33,12 @@ class ColoniaCtrl{
 	
 	private function Insertar()
 	{
-		$coloniaId		= $this->valida->validaID($_POST['coloniaId']);
-		$colonia		= $this->valida->validaNombre($_POST['colonia']);
+		$coloniaId			= $this->valida->ValidaID($_POST['coloniaId']);
+		$colonia			= $this->valida->ValidaNombre($_POST['colonia']);
+		$asociacion_colonos = $this->valida->ValidaTexto($_POST['asociacion_colonos']);
+		$presidente_colonos = $this->valida->ValidaTexto($_POST['presidente_colonos']);
 		
-		$resultado	= $this->modelo->Insertar($coloniaId,$colonia);
+		$resultado	= $this->modelo->Insertar($coloniaId,$colonia,$asociacion_colonos,$presidente_colonos);
 		
 		if($resultado){
 			require 'Vista/InsercionCorrecta.html';
@@ -48,7 +50,8 @@ class ColoniaCtrl{
 	
 	public function Eliminar()
 	{
-		
+		$coloniaId	= $this->valida->ValidaID($_POST['coloniaId']);
+		$resultado 	= $this->modelo->Eliminar($coloniaId);
 	}
 	
 	public function Modificar()

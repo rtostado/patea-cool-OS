@@ -1,15 +1,15 @@
 <?php
 
-class StatusCtrl{
+class ZonaCtrl{
 	private $modelo;
 	private $valida;
 	
 	//constructor
 	function __construct(){
-		require 'Modelo/StatusMdl.php';
+		require 'Modelo/ZonaMdl.php';
 		require 'aplicacion/Validar.php';
 		
-		$this->modelo = new StatusMdl();
+		$this->modelo = new ZonaMdl();
 		$this->valida = new Validar();
 	}
 	
@@ -29,12 +29,13 @@ class StatusCtrl{
 				break;
 		}
 	}
+	
 	private function Insertar()
 	{
-		$statusId		= $this->valida->validaID($_POST['statusId']);
-		$status			= $this->valida->validaNombre($_POST['status']);
+		$zonaId		= $this->valida->validaID($_POST['zonaId']);
+		$zona		= $this->valida->validaNombre($_POST['zona']);
 		
-		$resultado	= $this->modelo->Insertar($statusId,$status);
+		$resultado	= $this->modelo->Insertar($zonaId,$zona);
 		
 		if($resultado){
 			require 'Vista/InsercionCorrecta.html';
@@ -46,8 +47,8 @@ class StatusCtrl{
 	
 	public function Eliminar()
 	{
-		$statusId	= $this->valida->validaID($_POST['statusId']);
-		$resultado 	= $this->modelo->Eliminar($statusId);
+		$zonaId		= $this->valida->validaID($_POST['zonaId']);
+		$resultado 	= $this->modelo->Eliminar($zonaId);
 	}
 	
 	public function Modificar()

@@ -34,6 +34,7 @@ class CiudadanoCtrl{
 	private function Insertar()
 	{
 		
+		$num_afiliacion		= $this->valida->ValidaID($_POST['num_afiliacion']);
 		$nombre				= $this->valida->validaNombre($_POST['nombre']);
 		$apellidoP			= $this->valida->validaNombre($_POST['apellidoP']);
 		$apellidoM			= $this->valida->validaNombre($_POST['apellidoM']);
@@ -59,10 +60,11 @@ class CiudadanoCtrl{
 		$distritoId			= $this->valida->validaID($_POST['distritoId']);
 		$statusId			= $this->valida->validaID($_POST['statusId']);
 		$TipoMotivoAfiliacionId = $this->valida->validaID($_POST['TipoMotivoAfiliacionId']);
+		//$solicitud_imagen	= $this->valida->Valida
 		
-		$resultado	= $this->modelo->Insertar($nombre,$apellidoP,$apellidoM,$domicilio,$numeroExterior,$fecha_nac,$fecha_afiliacion,$telefono_fijo,
+		$resultado	= $this->modelo->Insertar($num_afiliacion,$nombre,$apellidoP,$apellidoM,$domicilio,$numeroExterior,$fecha_nac,$fecha_afiliacion,$telefono_fijo,
 						  					  $telefono_cel,$estado_civil,$tipo_sangre,$grado_de_estudios,$profesion,$correo,$trabaja_en,$carrera,
-						  					  $pasatiempos,$religion,$reporte,$participo,$zonaId,$coloniaId,$distritoId,$statusId,$TipoMotivoAfiliacionId);
+						  					  $pasatiempos,$religion,$reporte,$participo,$zonaId,$coloniaId,$distritoId,$statusId,$TipoMotivoAfiliacionId,$solicitud_imagen);
 		
 		if($resultado){
 			require 'Vista/UsuarioInsertado.php';
@@ -74,7 +76,8 @@ class CiudadanoCtrl{
 
 	public function Eliminar()
 	{
-		
+		$num_afiliacion	= $this->valida->ValidaID($_POST['num_afiliacion']);
+		$resultado 		= $this->modelo->Eliminar($num_afiliacion);
 	}
 	
 	public function Modificar()

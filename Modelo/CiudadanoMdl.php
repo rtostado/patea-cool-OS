@@ -2,6 +2,7 @@
 
 class CiudadanoMdl{
 	
+	public $num_afiliacion;
 	public $nombre;
 	public $apellidoP;
 	public $apellidoM;
@@ -27,12 +28,27 @@ class CiudadanoMdl{
 	public $distritoId;
 	public $statusId;
 	public $TipoMotivoAfiliacion;
+	public $pass;
+	public $bd_driver;
+	
+	function __construct(){
+		require("datebase_config.inc");
+		$this->bd_driver = new mysqli ($host,$user,$pass,$bd);
+		if($this->bd_driver->connect_error){
+			die("No se pudo realizar la coneccion");
+		}
+		else {
+			echo "Si se conecto...";
+		}	
+	}
+	
 	
 	//
-	public function Insertar($nombre,$apellidoP,$apellidoM,$domicilio,$numeroExterior,$fecha_nac,$fecha_afiliacion,$telefono_fijo,
+	public function Insertar($num_afiliacion,$nombre,$apellidoP,$apellidoM,$domicilio,$numeroExterior,$fecha_nac,$fecha_afiliacion,$telefono_fijo,
 						  $telefono_cel,$estado_civil,$tipo_sangre,$grado_de_estudios,$profesion,$correo,$trabaja_en,$carrera,
-						  $pasatiempos,$religion,$reporte,$participo,$zonaId,$coloniaId,$distritoId,$statusId,$TipoMotivoAfiliacionId)
+						  $pasatiempos,$religion,$reporte,$participo,$zonaId,$coloniaId,$distritoId,$statusId,$TipoMotivoAfiliacionId,$pass,$solicitud_imagen)
 	{
+		$this->num_afiliacion	= $num_afiliacion;
 		$this->nombre 	  		= $nombre;
 		$this->apellidoP  		= $apellidoP;
 		$this->apellidoM  		= $apellidoM;
@@ -58,7 +74,25 @@ class CiudadanoMdl{
 		$this->distritoId		= $distritoId;
 		$this->statusId			= $statusId;
 		$this->TipoMotivoAfiliacionId = $TipoMotivoAfiliacionId; 
+		$this->pass				= $pass;
+		$this->solicitud_imagen = $solicitud_imagen;
 		
+		$query = "INSERT INTO `Ciudadano`(`num_afiliacion`, `nombre`, `apellidopaterno`, `apellidomaterno`, `domicilio`, `numeroexterior`, 
+										  `fecha_nac`, `fecha_afiliacion`, `telefono_fijo`, `telefono_cel`, `estado_civil`, `tipo_sangre`, 
+										  `correo`, `grado_de_estudios`, `profesion`, `trabaja_en`, `carrera`, `pasatiempos`, `solicitud_imagen`, 
+										  `participo`, `reporte`, `pass`, `tipo_motivo_afiliacion_id`, `colonia_id`, `seccion_id`, `distrito_id`, 
+										   `status_id`) 
+				  VALUES (".$num_afiliacion.",'".$nombre."','".$apellidoP."','".$apellidoM."','".$domicilio."','".$numeroExterior."','".$fecha_nac."',
+				  		  '".$fecha_afiliacion."','".$telefono_fijo."','".$telefono_cel."','".$estado_civil."','".$tipo_sangre."','".$correo."',
+				  		  '".$grado_de_estudios."','".$profesion."','".$trabaja_en."','".$carrera."','".$pasatiempos."','".$solicitud_imagen."','".$participo."',
+				  		  '".$reporte."','".$pass."',".$TipoMotivoAfiliacionId.",".$coloniaId.",".$zonaId.",".$distritoId.",".$status.");";
+				  		  
+		$result = $this->bd_driver->query($query);
+		if($this->bd_driver->error){
+			die("error en la insercion");
+		}
+		
+		mysqli_close($bd_driver);
 		return TRUE;
 	}
 	
@@ -69,7 +103,18 @@ class CiudadanoMdl{
 	
 	public function Eliminar($num_afiliacion)
 	{
+		$this->num_afiliacion = $num_afiliacion;
 		
+		$query = "DELETE FROM `Ciudadano` WHERE `num_afiliacion` = ".$num_afiliacion."";
+		
+		$result = $this->bd_driver->query($query);
+		
+		if($this->bd_driver->error){
+			die("error en la insercion");
+		}
+		
+		mysqli_close($bd_driver);
+		return TRUE;
 	}
 	
 }
