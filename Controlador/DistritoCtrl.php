@@ -33,15 +33,15 @@ class DistritoCtrl{
 	private function Insertar()
 	{
 		$distritoId		= $this->valida->validaID($_POST['distritoId']);
-		$distrito		= $this->valida->validaNombre($_POST['distrito']);
+		$distrito		= $this->valida->validaID($_POST['distrito']);
 		
 		$resultado	= $this->modelo->Insertar($distritoId,$distrito);
 		
 		if($resultado){
-			require 'Vista/InsercionCorrecta.html';
+			require 'Vista/InsercionCorrecta.php';
 		}
 		else {
-			require 'Vista/Error.html';
+			require 'Vista/Error.php';
 		}
 	}
 	
@@ -53,7 +53,17 @@ class DistritoCtrl{
 	
 	public function Modificar()
 	{
+		$distritoId		= $this->valida->validaID($_POST['distritoId']);
+		$distrito		= $this->valida->validaID($_POST['distrito']);
 		
+		$resultado	= $this->modelo->Modificar($distritoId,$distrito);
+		
+		if($resultado){
+			echo "Registro modificado";
+		}
+		else {
+			require 'Vista/Error.php';
+		}
 	}
 	
 }

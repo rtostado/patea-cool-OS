@@ -33,15 +33,20 @@ class BancoIdeasCtrl{
 	private function Insertar()
 	{
 		//$status					  = $this->valida->ValidaTexto($_POST['status']);//ejemplo
-		$nombre					  = $this->valida->ValidaNombre($_POST['nombre']);
-		$descripcion	 		  = $this->valida->ValidaTexto($_POST['descripcion']);
+		$nombre = null;
+		$descripcion = null;
+		$ideaId 				  = $this->valida->ValidaID($_POST['ideaId']);
+		if(isset($_POST['nombre']))
+			$nombre					  = $this->valida->ValidaNombre($_POST['nombre']);
+		if(isset($_POST['descripcion']))
+			$descripcion	 		  = $this->valida->ValidaTexto($_POST['descripcion']);
 		$ciudadano_num_afiliacion = $this->valida->ValidaID($_POST['ciudadano_num_afiliacion']);
 		
-		$resultado	= $this->modelo->Insertar($nombre,$descripcion,/*$status,*/$ciudadano_num_afiliacion);
+		$resultado	= $this->modelo->Insertar($ideaId,$nombre,$descripcion,/*$status,*/$ciudadano_num_afiliacion);
 		
 		if($resultado){
 			require 'Vista/IdeaInsertada.php';
-			//$this->modelo->mostrar();
+			$this->modelo->mostrar();
 		}
 		else {
 			require 'Vista/Error.php';
@@ -52,11 +57,30 @@ class BancoIdeasCtrl{
 	{
 		$ciudadano_num_afiliacion = $this->valida->ValidaID($_POST['ciudadano_num_afiliacion']);
 		$resultado 	= $this->modelo->Eliminar($ciudadano_num_afiliacion);
+		if($resultado){
+			echo "Regitro eliminado";
+		}
 	}
 	
 	public function Modificar()
 	{
+		$ideaId 				  = $this->valida->ValidaID($_POST['ideaId']);
+		//$status					  = $this->valida->ValidaTexto($_POST['status']);//ejemplo
+		$nombre = null;
+		$descripcion = null;
+		$nombre					  = $this->valida->ValidaNombre($_POST['nombre']);
+		$descripcion	 		  = $this->valida->ValidaTexto($_POST['descripcion']);
+		$ciudadano_num_afiliacion = $this->valida->ValidaID($_POST['ciudadano_num_afiliacion']);
 		
+		$resultado	= $this->modelo->Modificar($ideaId,$nombre,$descripcion,/*$status,*/$ciudadano_num_afiliacion);
+		
+		if($resultado){
+			echo "Registro modificado";
+			$this->modelo->mostrar();
+		}
+		else {
+			require 'Vista/Error.php';
+		}
 	}
 	
 }

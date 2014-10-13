@@ -1,7 +1,6 @@
 <?php
 class BancoIdeasMdl{
 	
-	//private $ID;
 	private $bancodeideas_id;
 	private $nombre;
 	private $descripcion;
@@ -10,13 +9,13 @@ class BancoIdeasMdl{
 	private $bd_driver;
 	
 	function __construct(){
-		require("datebase_config.inc");
+		require("database_config.inc");
 		$this->bd_driver = new mysqli ($host,$user,$pass,$bd);
 		if($this->bd_driver->connect_error){
 			die("No se pudo realizar la coneccion");
 		}
 		else {
-			//echo "Si se conecto...";
+			echo "Si se conecto...";
 		}	
 	}
 	
@@ -31,7 +30,7 @@ class BancoIdeasMdl{
 		//$this->status  					= $status;
 		$this->ciudadano_num_afiliacion = $ciudadano_num_afiliacion;
 		
-		$query = "INSERT INTO `BancodeIdeas`(`banco_ideas_id`, `nombre`, `descripcion`, `num_afiliacion`)
+		$query = "INSERT INTO `bancodeideas`(`banco_ideas_id`, `nombre`, `descripcion`, `num_afiliacion`)
 				  VALUES(".$bancodeideas_id.",'".$nombre."','".$descripcion."',".$ciudadano_num_afiliacion.");";
 		
 		$resultado = $this->bd_driver->query($query);
@@ -40,7 +39,7 @@ class BancoIdeasMdl{
 			die("la insercion no se pudo realizar");
 		}
 		
-		mysqli_close($bd_driver);
+		//mysqli_close($bd_driver);
 		return TRUE;
 	}
 	public function mostrar(){
@@ -54,7 +53,7 @@ class BancoIdeasMdl{
 	{
 		$this->ID = $ID;
 		
-		$query = "DELETE FROM `BancodeIdeas` WHERE `banco_ideas_id` = ".$ID."";
+		$query = "DELETE FROM `bancodeideas` WHERE `banco_ideas_id` = ".$ID."";
 		
 		$result = $this->bd_driver->query($query);
 		
@@ -62,10 +61,28 @@ class BancoIdeasMdl{
 			die("error en la insercion");
 		}
 		
-		mysqli_close($bd_driver);
+		//mysqli_close($bd_driver);
 		return TRUE;
 	}
-	public function actualizar(){}
+	public function Modificar(){
+		$this->$bancodeideas_id			= $bancodeideas_id;
+		$this->nombre 					= $nombre;
+		$this->descripcion  			= $descripcion;
+		//$this->status  					= $status;
+		$this->ciudadano_num_afiliacion = $ciudadano_num_afiliacion;
+		
+		$query = "UPDATE `bancodeideas` SET `nombre`='".$nombre."', `descripcion`'".$descripcion."',
+		`num_afiliacion`= ".$ciudadano_num_afiliacion." WHERE `banco_ideas_id` = ".$bancodeideas_id.",);";
+		
+		$resultado = $this->bd_driver->query($query);
+		
+		if($this->bd_driver->error){
+			die("la insercion no se pudo realizar");
+		}
+		
+		//mysqli_close($bd_driver);
+		return TRUE;
+	}
 	
 	
 	

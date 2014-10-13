@@ -1,38 +1,40 @@
 <?php
 
 class CiudadanoMdl{
-	
-	public $num_afiliacion;
+		
+	public $numAfiliacion;
 	public $nombre;
 	public $apellidoP;
 	public $apellidoM;
 	public $domicilio;
 	public $numeroExterior;
-	public $fecha_nac;
-	public $fecha_afiliacion;
-	public $telefono_fijo;
-	public $telefono_cel;
-	public $estado_civil;
-	public $tipo_sangre;
-	public $grado_de_estudios;
+	public $fechaNac;
+	public $fechaAfiliacion;
+	public $telefonoFijo;
+	public $telefonoCel;
+	public $estadoCivil;
+	public $tipoSangre;
+	public $gradoDeEstudios;
 	public $profesion;
 	public $correo;
-	public $trabaja_en;
+	public $trabajaEn;
 	public $carrera;
 	public $pasatiempos;
-	public $religion;
 	public $reporte;
 	public $participo;
-	public $zonaId;
+	public $password;
+	public $seccionId;
 	public $coloniaId;
 	public $distritoId;
 	public $statusId;
-	public $TipoMotivoAfiliacion;
-	public $pass;
-	public $bd_driver;
+	public $codigoPostal;
+	public $TipoMotivoAfiliacionId;
+	public $solicitudImagen;
+	public $referenciadoPor;
+	
 	
 	function __construct(){
-		require("datebase_config.inc");
+		require("database_config.inc");
 		$this->bd_driver = new mysqli ($host,$user,$pass,$bd);
 		if($this->bd_driver->connect_error){
 			die("No se pudo realizar la coneccion");
@@ -41,64 +43,129 @@ class CiudadanoMdl{
 			echo "Si se conecto...";
 		}	
 	}
-	
-	
-	//
-	public function Insertar($num_afiliacion,$nombre,$apellidoP,$apellidoM,$domicilio,$numeroExterior,$fecha_nac,$fecha_afiliacion,$telefono_fijo,
-						  $telefono_cel,$estado_civil,$tipo_sangre,$grado_de_estudios,$profesion,$correo,$trabaja_en,$carrera,
-						  $pasatiempos,$religion,$reporte,$participo,$zonaId,$coloniaId,$distritoId,$statusId,$TipoMotivoAfiliacionId,$pass,$solicitud_imagen)
-	{
-		$this->num_afiliacion	= $num_afiliacion;
-		$this->nombre 	  		= $nombre;
-		$this->apellidoP  		= $apellidoP;
-		$this->apellidoM  		= $apellidoM;
-		$this->domicilio  		= $domicilio;
-		$this->numeroExterior	= $numeroExterior;
-		$this->fecha_nac		= $fecha_nac;
-		$this->fecha_afiliacion	= $fecha_afiliacion;
-		$this->telefono_fijo	= $telefono_fijo;
-		$this->telefono_cel		= $telefono_cel;
-		$this->estado_civil		= $estado_civil;
-		$this->tipo_sangre		= $tipo_sangre;
-		$this->grado_de_estudios= $grado_de_estudios;
+	//(
+	public function mostrar(){
+		print "ID: $this->numAfiliacion<br/>";
+		print "Nombre: $this->nombre<br/>";
+		print "FechaAfiliacion: $this->fechaAfiliacion<br/>";
+	}
+	public function Insertar($numAfiliacion,$nombre,$apellidoP,$apellidoM,$domicilio,$numExterior,$fechaNac,$fechaAfiliacion,
+							$telefonoFijo,$telefonoCel,$estadoCivil,$tipoSangre,$correo,$gradoDeEstudios,$profesion,$trabajaEn,
+							$carrera,$pasatiempos,$solicitudImagen,$participo,$reporte,$password,$TipoMotivoAfiliacionId,
+						  	 $coloniaId,$seccionId,$distritoId,$referenciadoPor,$statusId,$codigoPostal){
+			
+		$this->numAfiliacion    = $numAfiliacion;	
+		$this->nombre			= $nombre;			
+		$this->apellidoP		= $apellidoP;
+		$this->apellidoM		= $apellidoM;  	
+		$this->domicilio		= $domicilio;
+		$this->numExterior	    = $numExterior;
+		$this->fechaNac			= $fechaNac;
+		$this->fechaAfiliacion	= $fechaAfiliacion;
+		$this->telefonoFijo		= $telefonoFijo;
+		$this->telefonoCel		= $telefonoCel;
+		$this->estadoCivil		= $estadoCivil;
+		$this->tipoSangre		= $tipoSangre;
+		$this->gradoDeEstudios= $gradoDeEstudios;
 		$this->profesion		= $profesion;
 		$this->correo	  		= $correo;
-		$this->trabaja_en		= $trabaja_en;
+		$this->trabajaEn		= $trabajaEn;
 		$this->carrera			= $carrera;
 		$this->pasatiempos		= $pasatiempos;
-		$this->religion			= $religion;
 		$this->reporte			= $reporte;
 		$this->participo		= $participo;
-		$this->zonaId			= $zonaId;
+		$this->password			= $password;
+		$this->seccionId		= $seccionId;
 		$this->coloniaId		= $coloniaId;
 		$this->distritoId		= $distritoId;
 		$this->statusId			= $statusId;
+		$this->codigoPostal		= $codigoPostal;
+		$this->solicitudImagen	= $solicitudImagen;
 		$this->TipoMotivoAfiliacionId = $TipoMotivoAfiliacionId; 
-		$this->pass				= $pass;
-		$this->solicitud_imagen = $solicitud_imagen;
+		$this->referenciadoPor	= $referenciadoPor;
 		
-		$query = "INSERT INTO `Ciudadano`(`num_afiliacion`, `nombre`, `apellidopaterno`, `apellidomaterno`, `domicilio`, `numeroexterior`, 
-										  `fecha_nac`, `fecha_afiliacion`, `telefono_fijo`, `telefono_cel`, `estado_civil`, `tipo_sangre`, 
-										  `correo`, `grado_de_estudios`, `profesion`, `trabaja_en`, `carrera`, `pasatiempos`, `solicitud_imagen`, 
-										  `participo`, `reporte`, `pass`, `tipo_motivo_afiliacion_id`, `colonia_id`, `seccion_id`, `distrito_id`, 
-										   `status_id`) 
-				  VALUES (".$num_afiliacion.",'".$nombre."','".$apellidoP."','".$apellidoM."','".$domicilio."','".$numeroExterior."','".$fecha_nac."',
-				  		  '".$fecha_afiliacion."','".$telefono_fijo."','".$telefono_cel."','".$estado_civil."','".$tipo_sangre."','".$correo."',
-				  		  '".$grado_de_estudios."','".$profesion."','".$trabaja_en."','".$carrera."','".$pasatiempos."','".$solicitud_imagen."','".$participo."',
-				  		  '".$reporte."','".$pass."',".$TipoMotivoAfiliacionId.",".$coloniaId.",".$zonaId.",".$distritoId.",".$status.");";
+		/*$query = "INSERT INTO `ciudadano`(num_afiliacion,nombre,apellidopaterno,apellidomaterno,domicilio,numeroexterior, 
+										  fecha_nac,fecha_afiliacion,telefono_fijo,telefono_cel,estado_civil,tipo_sangre, 
+										  correo,grado_de_estudios,profesion,trabaja_en,carrera,pasatiempos,solicitud_imagen, 
+										  participo,reporte,pass,tipo_motivo_afiliacion_id,colonia_id,seccion_id,
+										  distrito_id,num_afiliacionfk,status_id,codigo_postal) 
+				  VALUES (".$numAfiliacion.",'".$nombre."','".$apellidoP."','".$apellidoM."','".$domicilio."',
+				  		  '".$numExterior."','".$fechaNac."','".$fechaAfiliacion."','".$telefonoFijo."','".$telefonoCel."',
+				  		  '".$estadoCivil."',
+				  		  '".$tipoSangre."','".$correo."','".$gradoDeEstudios."','".$profesion."','".$trabajaEn."',
+				  		  '".$carrera."','".$pasatiempos."','".$solicitudImagen."','".$participo."',
+				  		  '".$reporte."','".$password."',".$TipoMotivoAfiliacionId.",".$coloniaId.",".$seccionId.",
+				  		  ".$distritoId.",".$referenciadoPor.",".$statusId.",'".$codigoPostal."');";*/
+		$query= "INSERT INTO `ciudadano` (num_afiliacion,nombre,apellidopaterno,apellidomaterno,domicilio,numeroexterior, 
+										  fecha_nac,fecha_afiliacion,telefono_fijo,telefono_cel,estado_civil,tipo_sangre, 
+										  correo,grado_de_estudios,profesion,trabaja_en,carrera,pasatiempos,solicitud_imagen,
+										  participo,reporte,pass,tipo_motivo_afiliacion_id,colonia_id) 
+		 VALUES (".$numAfiliacion.",'".$nombre."','".$apellidoP."','".$apellidoM."','".$domicilio."','".$numExterior."',
+		 		 '".$fechaNac."','".$fechaAfiliacion."','".$telefonoFijo."','".$telefonoCel."',
+				  		  '".$estadoCivil."',
+				  		  '".$tipoSangre."','".$correo."','".$gradoDeEstudios."','".$profesion."','".$trabajaEn."',
+				  		  '".$carrera."','".$pasatiempos."','".$solicitudImagen."','".$participo."',
+				  		  '".$reporte."','".$password."','".$TipoMotivoAfiliacionId."','".$coloniaId."');";
 				  		  
 		$result = $this->bd_driver->query($query);
 		if($this->bd_driver->error){
-			die("error en la insercion");
+			$this->mostrar();
+			echo("error en la insercion");
 		}
-		
-		mysqli_close($bd_driver);
 		return TRUE;
 	}
 	
-	public function Modificar($num_afiliacion)
-	{
+	public function Modificar($numAfiliacion,$nombre,$apellidoP,$apellidoM,$domicilio,$numExterior,$fechaNac,$fechaAfiliacion,
+							$telefonoFijo,$telefonoCel,$estadoCivil,$tipoSangre,$correo,$gradoDeEstudios,$profesion,$trabajaEn,
+							$carrera,$pasatiempos,$solicitudImagen,$participo,$reporte,$password,$TipoMotivoAfiliacionId,
+						  	 $coloniaId,$seccionId,$distritoId,$referenciadoPor,$statusId,$codigoPostal){
+			
+		$this->numAfiliacion    = $numAfiliacion;	
+		$this->nombre			= $nombre;			
+		$this->apellidoP		= $apellidoP;
+		$this->apellidoM		= $apellidoM;  	
+		$this->domicilio		= $domicilio;
+		$this->numExterior		= $numExterior;
+		$this->fechaNac			= $fechaNac;
+		$this->fechaAfiliacion	= $fechaAfiliacion;
+		$this->telefonoFijo		= $telefonoFijo;
+		$this->telefonoCel		= $telefonoCel;
+		$this->estadoCivil		= $estadoCivil;
+		$this->tipoSangre		= $tipoSangre;
+		$this->gradoDeEstudios= $gradoDeEstudios;
+		$this->profesion		= $profesion;
+		$this->correo	  		= $correo;
+		$this->trabajaEn		= $trabajaEn;
+		$this->carrera			= $carrera;
+		$this->pasatiempos		= $pasatiempos;
+		$this->reporte			= $reporte;
+		$this->participo		= $participo;
+		$this->password			= $password;
+		$this->seccionId		= $seccionId;
+		$this->coloniaId		= $coloniaId;
+		$this->distritoId		= $distritoId;
+		$this->statusId			= $statusId;
+		$this->codigoPostal		= $codigoPostal;
+		$this->solicitudImagen	= $solicitudImagen;
+		$this->TipoMotivoAfiliacionId = $TipoMotivoAfiliacionId; 
+		$this->referenciadoPor	= $referenciadoPor;
 		
+		$query = "UPDATE `ciudadano` SET nombre = '".$nombre."',apellidopaterno = '".$apellidoP."',
+			apellidomaterno = '".$apellidoM."', domicilio = '".$domicilio."',numeroexterior = '".$numeroExterior."',
+			fecha_nac = '".$fechaNac."', fecha_afiliacion = '".$fechaAfiliacion."', telefono_fijo = '".$telefonoFijo."',
+			telefono_cel = '".$telefonoCel."', estado_civil = '".$estadoCivil."', tipo_sangre = '".$tipoSangre."',
+			grado_de_estudios = '".$gradoDeEstudios."', profesion = '".$profesion."', correo = '".$correo."',
+			trabaja_en = '".$trabajaEn."', carrera = '".$carrera."', pasatiempos = '".$pasatiempos."',
+			reporte = '".$reporte."', participo = '".$participo."', pass = '".$password."',
+			seccion_id = '".$seccionId."', colonia_id = '".$coloniaId."', distrito_id = '".$distritoID."',
+			status_id = '".$statusId."', codigo_postal = '".$codigoPostal."', solicitud_imagen = '".$solicitudImagen."',
+			tipo_motivo_afiliacion_id = '".$TipoMotivoAfiliacionId."', 
+			num_filiacionfk = '".$referenciadoPor."' WHERE num_afiliacion = ".$numAfiliacion."";
+		$result = $this->bd_driver->query($query);
+		if($this->bd_driver->error){
+			die("Pelas");
+		}
+		return TRUE;
 	}
 	
 	public function Eliminar($num_afiliacion)
@@ -112,8 +179,6 @@ class CiudadanoMdl{
 		if($this->bd_driver->error){
 			die("error en la insercion");
 		}
-		
-		mysqli_close($bd_driver);
 		return TRUE;
 	}
 	

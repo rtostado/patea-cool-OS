@@ -7,7 +7,7 @@ class StatusMdl{
 	public $bd_driver;
 	
 	function __construct(){
-		require("datebase_config.inc");
+		require("database_config.inc");
 		$this->bd_driver = new mysqli ($host,$user,$pass,$bd);
 		if($this->bd_driver->connect_error){
 			die("No se pudo realizar la coneccion");
@@ -31,7 +31,7 @@ class StatusMdl{
 			die("pelas puto");
 		}
 		
-		mysqli_close($bd_driver);
+		//mysqli_close($bd_driver);
 		return TRUE;
 	}
 	
@@ -47,13 +47,25 @@ class StatusMdl{
 			die("error en la insercion");
 		}
 		
-		mysqli_close($bd_driver);
+		//mysqli_close($bd_driver);
 		return TRUE;
 	}
 	
 	public function Modificar($statusId)
 	{
+		$this->statusId	= $statusId;
+		$this->status	= $status;
 		
+		$query = "UPDATE `status` SET status = '".$status."' WHERE status_id = ".$statusId."";
+		
+		$result = $this->bd_driver->query($query);
+		
+		if($this->bd_driver->error){
+			die("pelas puto");
+		}
+		
+		//mysqli_close($bd_driver);
+		return TRUE;
 	}
 	
 }

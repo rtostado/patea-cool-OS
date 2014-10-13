@@ -1,5 +1,4 @@
 <?php
-
 class ZonaCtrl{
 	private $modelo;
 	private $valida;
@@ -33,15 +32,15 @@ class ZonaCtrl{
 	private function Insertar()
 	{
 		$zonaId		= $this->valida->validaID($_POST['zonaId']);
-		$zona		= $this->valida->validaNombre($_POST['zona']);
+		$zona		= $this->valida->ValidaID($_POST['zona']);
 		
-		$resultado	= $this->modelo->Insertar($zonaId,$zona);
+		$resultado	= $this->modelo->Insertar($zonaId, $zona);
 		
 		if($resultado){
-			require 'Vista/InsercionCorrecta.html';
+			require 'Vista/InsercionCorrecta.php';
 		}
 		else {
-			require 'Vista/Error.html';
+			require 'Vista/Error.php';
 		}
 	}
 	
@@ -49,11 +48,24 @@ class ZonaCtrl{
 	{
 		$zonaId		= $this->valida->validaID($_POST['zonaId']);
 		$resultado 	= $this->modelo->Eliminar($zonaId);
+		if($resultado){
+			echo "Registro ".$zonaId." eliminado";
+		}
 	}
 	
 	public function Modificar()
 	{
+		$zonaId		= $this->valida->validaID($_POST['zonaId']);
+		$zona		= $this->valida->validaID($_POST['zona']);
 		
+		$resultado	= $this->modelo->Modificar($zonaId,$zona);
+		
+		if($resultado){
+			echo "Registro actualizado";
+		}
+		else {
+			require 'Vista/Error.html';
+		}
 	}
 	
 }

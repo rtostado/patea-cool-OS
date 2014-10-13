@@ -33,15 +33,18 @@ class ColoniaCtrl{
 	
 	private function Insertar()
 	{
-		$coloniaId			= $this->valida->ValidaID($_POST['coloniaId']);
-		$colonia			= $this->valida->ValidaNombre($_POST['colonia']);
-		$asociacion_colonos = $this->valida->ValidaTexto($_POST['asociacion_colonos']);
-		$presidente_colonos = $this->valida->ValidaTexto($_POST['presidente_colonos']);
-		
-		$resultado	= $this->modelo->Insertar($coloniaId,$colonia,$asociacion_colonos,$presidente_colonos);
-		
+		$asociacion_col =null;
+		$presidente_col =null;		
+		if(isset($_POST['asociacion_col']))
+			$asociacion_col = $this->valida->ValidaTexto($_POST['asociacion_col']);
+		if(isset($_POST['presidente_col']))
+			$presidente_col = $this->valida->ValidaNombre($_POST['presidente_col']);
+		$coloniaId		= $this->valida->validaID($_POST['coloniaId']);
+		$colonia		= $this->valida->validaNombre($_POST['colonia']);
+		$resultado	= $this->modelo->Insertar($coloniaId,$colonia,$asociacion_col, $presidente_col);
 		if($resultado){
-			require 'Vista/InsercionCorrecta.html';
+			require 'Vista/InsercionCorrecta.php';
+			$this->modelo->mostrar();
 		}
 		else {
 			require 'Vista/Error.html';
@@ -50,13 +53,28 @@ class ColoniaCtrl{
 	
 	public function Eliminar()
 	{
-		$coloniaId	= $this->valida->ValidaID($_POST['coloniaId']);
-		$resultado 	= $this->modelo->Eliminar($coloniaId);
+		$coloniaId = $this->valida->ValidaID($_POST['coloniaId']);
+		$resultado = $this->modelo->Eliminar($coloniaId);	
+		if($resultado){
+			echo "Se ha eliminado el registro: $coloniaId";
+		}
 	}
 	
 	public function Modificar()
 	{
-		
+		$asociacion_col =null;
+		$presidente_col =null;	
+		if(isset($_POST['asociacion_col']))
+			$asociacion_col = $this->valida->ValidaTexto($_POST['asociacion_col']);
+		if(isset($_POST['presidente_col']))
+			$presidente_col = $this->valida->ValidaNombre($_POST['presidente_col']);	
+		$coloniaId		= $this->valida->validaID($_POST['coloniaId']);
+		$colonia		= $this->valida->validaNombre($_POST['colonia']);
+		$resultado	= $this->modelo->Modificar($coloniaId,$colonia,$asociacion_col, $presidente_col);
+		if($resultado){
+			echo "Registro actualizado";
+			$this->modelo->mostrar();
+		}
 	}
 }
 

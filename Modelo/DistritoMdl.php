@@ -7,7 +7,7 @@ class DistritoMdl{
 	public $bd_driver;
 	
 	function __construct(){
-		require("datebase_config.inc");
+		require("database_config.inc");
 		$this->bd_driver = new mysqli ($host,$user,$pass,$bd);
 		if($this->bd_driver->connect_error){
 			die("No se pudo realizar la coneccion");
@@ -22,7 +22,7 @@ class DistritoMdl{
 		$this->distritoId	= $distritoId;
 		$this->distrito		= $distrito;
 		
-		$query = "INSERT INTO `Distrito`(`distrito_id`, `distrito`)
+		$query = "INSERT INTO `distrito`(`distrito_id`, `distrito`)
 				  VALUES(".$distritoId.",'".$distrito."');"; 
 				  
 		$result = $this->bd_driver->query($query);
@@ -31,7 +31,7 @@ class DistritoMdl{
 			die("pelas puto");
 		}
 		
-		mysqli_close($bd_driver);
+		//mysqli_close($bd_driver);
 		return TRUE;
 	}
 	
@@ -44,16 +44,28 @@ class DistritoMdl{
 		$result = $this->bd_driver->query($query);
 		
 		if($this->bd_driver->error){
-			die("error en la insercion");
+			die("error en la eliminacion");
 		}
 		
-		mysqli_close($bd_driver);
+		//mysqli_close($bd_driver);
 		return TRUE;
 	}
 	
 	public function Modificar($distritoId)
 	{
+		$this->distritoId	= $distritoId;
+		$this->distrito		= $distrito;
 		
+		$query = "UPDATE `distrito` SET distrito = '".$distrito."' WHERE distrito_id = ".$distritoId."";
+				  
+		$result = $this->bd_driver->query($query);
+		
+		if($this->bd_driver->error){
+			die("pelas puto");
+		}
+		
+		//mysqli_close($bd_driver);
+		return TRUE;
 	}
 	
 }

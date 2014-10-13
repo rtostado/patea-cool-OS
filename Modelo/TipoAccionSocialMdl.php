@@ -1,12 +1,12 @@
 <?php
 class TipoAccionSocialMdl{
 
-	private $ID;		
+	private $tipoAccionSocialIs;		
 	private $tipoAccionSocial;
 	private $bd_driver;
 	
 	function __construct(){
-		require("datebase_config.inc");
+		require("database_config.inc");
 		$this->bd_driver = new mysqli ($host,$user,$pass,$bd);
 		if($this->bd_driver->connect_error){
 			die("No se pudo realizar la coneccion");
@@ -16,12 +16,12 @@ class TipoAccionSocialMdl{
 		}	
 	}
 	
-	public function Insertar($ID,$tipoAccionSocial){
-		$this ->ID=$ID;
+	public function Insertar($tipoAccionSocialId,$tipoAccionSocial){
+		$this ->tipoAccionSocialId=$tipoAccionSocialId;
 		$this ->tipoAccionSocial= $tipoAccionSocial;
 		
-		$query = "INSERT INTO `TipoAccionSocial`(`tipoaccionsocial_id`, `tipoaccionsocial`)
-				  VALUES(".$ID.",'".$tipoAccionSocial."');";
+		$query = "INSERT INTO `tipoAccionSocial`(`tipoaccionsocial_id`, `tipoaccionsocial`)
+				  VALUES(".$tipoAccionSocialId.",'".$tipoAccionSocial."');";
 				  
 		$result = $this->bd_driver->query($query);
 		
@@ -29,7 +29,7 @@ class TipoAccionSocialMdl{
 			die("pelas puto");
 		}
 		
-		mysqli_close($bd_driver);
+		//mysqli_close($bd_driver);
 		return TRUE;
 	}
 	public function mostrar(){
@@ -38,7 +38,7 @@ class TipoAccionSocialMdl{
 	}
 	public function Eliminar($ID)
 	{
-		$this->ID = $ID;
+		$this->tipoAccionSocialId = $ID;
 		
 		$query = "DELETE FROM `TipoAccionSocial` WHERE `tipoaccionsocial_id` = ".$ID."";
 		
@@ -48,11 +48,25 @@ class TipoAccionSocialMdl{
 			die("error en la insercion");
 		}
 		
-		mysqli_close($bd_driver);
+		//mysqli_close($bd_driver);
 		return TRUE;
 	}
-	public function actualizar(){
+	public function Modificar($tipoAccionSocialId, $tipoAccionSocial){
+		$this ->tipoAccionSocialId=$tipoAccionSocialId;
+		$this ->tipoAccionSocial= $tipoAccionSocial;
 		
+		$query = "UPDATE `TipoAccionSocial` SET tipoaccionsocial = '".$tipoAccionSocial."' 
+			WHERE tipoaccionsocial_id ".$tipoAccionSocialId."";
+				  
+				  
+		$result = $this->bd_driver->query($query);
+		
+		if($this->bd_driver->error){
+			die("pelas puto");
+		}
+		
+		//mysqli_close($bd_driver);
+		return TRUE;
 	}
 }
 ?>

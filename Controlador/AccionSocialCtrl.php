@@ -5,7 +5,7 @@ class AccionSocialCtrl{
 	private $valida;
 	//constructor
 	function __construct(){
-		require 'modelo/AccionSocialMdl.php';
+		require 'Modelo/AccionSocialMdl.php';
 		$this->modelo = new AccionSocialMdl();
 		require 'aplicacion/Validar.php';
 		$this ->valida = new Validar();
@@ -30,25 +30,40 @@ class AccionSocialCtrl{
 	//se asigna a cada variable su valor correcto (ya validado)
 	private function Insertar()
 	{
-		$ID					= $this->valida->ValidaID($_POST['ID']); //ejemplo
-		$calificacion 	  	= $this->valida->ValidaID($_POST['calificacion']);
-		$numParticipantes 	= $this->valida->ValidaID($_POST['numParticipantes']);
-		$status 		  	= $this->valida->ValidaTexto($_POST['status']);
-		$nombre			  	= $this->valida->ValidaNombre($_POST['nombre']);
-		$descripcion	  	= $this->valida->ValidaTexto($_POST['descripcion']);
-		$fechaInicio	  	= $this->valida->ValidaFecha($_POST['fechaInicio']);
-		$fechaFin		  	= $this->valida->ValidaFecha($_POST['fechaFin']);
-		$tipoaccionsocialId = $this->valida->ValidaID($_POST['tipoaccionsocialId']);
+		$nombre=null;
+		$calificacion=null;
+		$descripcion=null;
+		$numParticipantes=null;
+		$fechaInicio=null;
+		$fechaFin=null;
+		$tipoaccionsocialId=null;
 		
-		$resultado	= $this->modelo->Insertar($ID,$nombre,$fechaInicio,$fechaFin,
-											$descripcion,$calificacion,$numParticipantes,$status,$tipoaccionsocialId);
+		$accionId		= $this->valida->ValidaID($_POST['accionId']); //ejemplo
+		if(isset($_POST['calificacion']))
+			$calificacion 	  	= $this->valida->ValidaID($_POST['calificacion']);
+		if(isset($_POST['numParticipantes']))
+		$numParticipantes 	= $this->valida->ValidaID($_POST['numParticipantes']);
+		//$status 		  	= $this->valida->ValidaTexto($_POST['status']);
+		if(isset($_POST['nombre']))
+			$nombre			  	= $this->valida->ValidaNombre($_POST['nombre']);
+		if(isset($_POST['descripcion']))
+			$descripcion	  	= $this->valida->ValidaTexto($_POST['descripcion']);
+		if(isset($_POST['fechaInicio']))
+			$fechaInicio	  	= $this->valida->ValidaFecha($_POST['fechaInicio']);
+		if(isset($_POST['fechaFin']))
+			$fechaFin		  	= $this->valida->ValidaFecha($_POST['fechaFin']);
+		if(isset($_POST['tipoaccionsocialId']))
+			$tipoaccionsocialId = $this->valida->ValidaID($_POST['tipoaccionsocialId']);
+		
+		$resultado	= $this->modelo->Insertar($accionId, $nombre, $fechaInicio, $fechaFin, $descripcion,
+					 $calificacion, $numParticipantes, $tipoaccionsocialId);
 		
 		if($resultado){
-			require 'vista/AccionInsertada.php';
+			require 'Vista/AccionInsertada.php';
 			//$this->modelo->mostrar();
 		}
 		else {
-			require 'vista/Error.php';
+			require 'Vista/Error.php';
 		}
 	}
 	
@@ -56,10 +71,47 @@ class AccionSocialCtrl{
 	{
 		$ID			= $this->valida->ValidaID($_POST['ID']);
 		$resultado 	= $this->modelo->Eliminar($ID);
+		if($resultado){
+			echo "Registro eliminado";
+		}
 	}
 	
 	public function Modificar()
 	{
+		$nombre=null;
+		$calificacion=null;
+		$descripcion=null;
+		$numParticipantes=null;
+		$fechaInicio=null;
+		$fechaFin=null;
+		$tipoaccionsocialId=null;
 		
+		$accionId		= $this->valida->ValidaID($_POST['accionId']); //ejemplo
+		if(isset($_POST['calificacion']))
+			$calificacion 	  	= $this->valida->ValidaID($_POST['calificacion']);
+		if(isset($_POST['numParticipantes']))
+		$numParticipantes 	= $this->valida->ValidaID($_POST['numParticipantes']);
+		//$status 		  	= $this->valida->ValidaTexto($_POST['status']);
+		if(isset($_POST['nombre']))
+			$nombre			  	= $this->valida->ValidaNombre($_POST['nombre']);
+		if(isset($_POST['descripcion']))
+			$descripcion	  	= $this->valida->ValidaTexto($_POST['descripcion']);
+		if(isset($_POST['fechaInicio']))
+			$fechaInicio	  	= $this->valida->ValidaFecha($_POST['fechaInicio']);
+		if(isset($_POST['fechaFin']))
+			$fechaFin		  	= $this->valida->ValidaFecha($_POST['fechaFin']);
+		if(isset($_POST['tipoaccionsocialId']))
+			$tipoaccionsocialId = $this->valida->ValidaID($_POST['tipoaccionsocialId']);
+		
+		$resultado	= $this->modelo->Modificar($accionId, $nombre, $fechaInicio, $fechaFin, $descripcion,
+					 $calificacion, $numParticipantes, $tipoaccionsocialId);
+		
+		if($resultado){
+			echo "Registro modificado";
+			//$this->modelo->mostrar();
+		}
+		else {
+			require 'Vista/Error.php';
+		}
 	}
 }
