@@ -1,0 +1,102 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.areasLaterales{
+	background: none repeat scroll 0 0;
+	margin-right: 1px;
+	position: absolute;
+	width: 8px;
+} 
+.perillaLateral{
+	background: none repeat scroll 0 0;
+	height: 40px;
+	width: 8px;
+}
+body{
+	background-color: #13BDFF;
+	background-image: url(../Imagenes/Basilica.jpg);
+}
+form{
+	background-color: #5C0094;
+	border-radius: 50px;
+	padding-top: 0%;
+	padding-bottom: 2em;
+	
+	
+	background-image: url(../Imagenes/Logo_Yo_tambien_soy_zapopan.png);
+	background-size: 200px;
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	margin: 2% 7% 7%;	
+}
+h1{
+	color: white;
+	text-align: left;
+	font: "Arial Black";
+	font: ;
+}
+ul{
+	list-style: none outside none;
+}
+ul#navPrincipal li{
+	float:left;
+	background-image: url(../Imagenes/images.jpg);
+	color:#FFFFFF;
+	font: "Arial Black";
+}
+li.navNoticias{
+	width: 65px;
+}
+li.navEventos{
+	width: 65px;
+}
+li.navCalendario{
+	width: 80px;
+}
+li.navRegistros{
+	width: 70px;
+}
+li.navContacto{
+	65px;
+}
+#cabeza h1 a img{
+	width: 200px;
+}
+#cabeza{
+	margin: 2% 11% 0;
+}
+ul#navlogin li{
+	float:right;
+	background-image: url(../Imagenes/images.jpg);
+	color:white;
+	font: "Arial Black";
+}
+
+form table{
+	padding: 1em;
+	/*background-image: url(../Imagenes/Logo_Yo_tambien_soy_zapopan.png);*/
+	background-size: 500px;
+	background-repeat: no-repeat;
+	background-position: right bottom; 
+	background-color: white;
+	margin: 0em 7em 3.5em 7em;
+	
+	border-radius: 5px;
+	border-color: 
+}
+td{
+	padding: .2em;
+	padding-bottom: 1em;
+}
+input{
+	border-radius: 2px;
+}
+div.unico td{
+	
+}
+header#cabeza{
+	/*background-image: url(../Imagenes/Basilica.jpg);
+	background-size: cover;*/
+}
+

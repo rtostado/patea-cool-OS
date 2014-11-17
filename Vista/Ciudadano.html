@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> </title>
+<style type="text/css">
+	@import url('aplicacion/Zapopan.css');
+</style>
+<table style="color:white;">
+	<tr>
+		<td for="usuario"> <label>Usuario:</label> </td>
+		<td><input type="text" id="usuario" name="usuario" placeholder="usuario"></td>
+		<td for="pass"> <label>Password:</label> </td>
+		<td><input type="password" id="pass" name="pass" placeholder="contraseña"></td>
+	</tr>
+</table>
+</head>
+<body>	
+	<header id="cabeza">
+		<h1>
+			<a href="/Vista/Login.html" style="color:blue;">
+				<img id="logoPrincipal" alt="Yo tambien soy zapopan" src="../Imagenes/Logo_Yo_tambien_soy_zapopan.png" />
+			</a>
+		</h1> 
+		<nav>
+			<ul id="navPrincipal">
+				<li class="navNoticias">
+					<a href="" style="color:#4C668C;">Noticias</a>
+				</li>
+				<li class="navEventos">
+					<a href="" style="color:#4C668C;">Eventos</a>
+				</li>
+				<li class="navCalendario">
+					<a href="" style="color:#4C668C;">Calendario</a>
+				</li>
+				<li class="navRegistros">
+					<a href="RegistroEleccion.html" style="color:#4C668C;">Registros</a>
+				</li>
+				<li class="navContacto">
+					<a href="" style="color:#4C668C;">Contacto</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<aside id="ladoIzquierdo" class="areasLaterales" style="display: none">
+	</aside>
+	<aside id="ladoDerecho" class="areasLaterales" style="display: none">
+	</aside>
+	<form method ="post">
+		<table>
+			<caption><h1>Registro de Ciudadanos</h1></caption>
+			<tbody>
+				<tr>
+					<td>
+						<div>
+							<label for="nombre">Nombre</label>
+							<input type="text" id="nombre" name="nombre" />
+						</div>
+					</td>
+					<td>
+						<div>
+							<label for="apellidoP">Apellido Paterno</label>
+							<input type="text" id="apellidoP" name="apellidoP" />
+						</div>
+					</td>
+					<td>
+						<div>
+							<label for="apellidoM">Apellido Materno</label>
+							<input type="text" id="apellidoM" name="apellidoM" />
+						</div>
+					</td>
+					<td>
+						<div>
+							<label for="sexo">Sexo:</label>
+							<td>
+								<input type="radio" name="sexo" value="Masculino"/>Masculino<br />
+								<input type="radio" name="sexo" value="Femenino"/>Femenino
+							</td>
+						</div>
+					</td>
+				</tr>	
+				<tr>
+					<legend>
+					<td>
+						<div>
+							<label for="calle">Calle</label>
+							<input type="text" id="calle" name="calle" />
+						</div>
+					</td>
+					<td>
+						<div>
+							<label for="umeroExt">Numero Exterior</label>
+							<input type="text" id="numeroExt" name="" />
+						</div>
+					</td>
+					<td>
+						<div>
+							<label for="codigoPostal">Codigo Postal</label>
+							<input type="text" id="codigoPostal" name="codigoPostal" />
+						</div>
+					</td>
+					
+					</legend>
+				</tr>	
+				<tr>
+					<td>
+						<div>
+							<label for="colonia">Colonia</label>
+							<select>
+								<optgroup>
+									<option>Jardin Real</option>
+									<option>Jardines del valle</option>
+									<option>El colli urbano </option>
+									<option>Otro</option>
+								</optgroup>
+							</select>
+						</div>
+					</td>
+					<td>
+						<div>
+							<label for="distrito">Distrito</label>
+							<input type="radio" name="distrito" value="distrito 4"/>4
+							<input type="radio" name="distrito" value="distrito 6"/>6
+							<input type="radio" name="distrito" value="distrito 10"/>10
+						</div>
+					</td>
+					<td>
+						<div>
+							<label for="seccion">Sección</label>
+							<input type="text" id="seccion" name="seccion" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>Fecha de Nacimiento</th>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<div>
+							<label for="diaNacimiento">Dia</label>
+							<input type="number" id="diaNacimiento" name="diaNacimiento" />
+						
+							<label for="diaNacimiento">Mes</label>
+							<select>
+								<optgroup>
+									<option>Enero</option>
+									<option>Febrero</option>
+									<option>Marzo</option>
+									<option>Abril</option>
+									<option>Mayo</option>
+									<option>Junio</option>
+									<option>Julio</option>
+									<option>Agosto</option>
+									<option>Septiembre</option>
+									<option>Octubre</option>
+									<option>Noviembre</option>
+									<option>Diciembre</option>
+								</optgroup>
+							</select>
+							<!--<input type="date" id="mesNacimiento" name="mesNacimiento" />-->
+						
+							<label for="diaNacimiento">Año</label>
+							<input type="number" id="anioNacimiento" name="anioNacimiento" />
+						</div>
+						
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div>
+							<label for="telefono">Telefono fijo</label>
+							<input type="tel" id="telefono" name="telefono" />
+						</div>
+					</td>
+					<td>
+						<div>
+							<label for="celular">Celular</label>
+							<input type="tel" id="celular" name="celular" />
+						</div>
+					</td>
+					<td>
+							<div>
+								<label for="correoElectronico">Correo electronico</label>
+								<div id="correoo">
+									<input type="email" id="correoElectronico" name="correoElectronico" />
+									<button id="masCorreo" name="masCorreo"  onclick="agrearCorreo">+</button>
+								</div>
+								
+								
+							</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+							<div>
+								<label for="gradoEstudios">Grado de estudios</label>
+								<input type="text" id="gradoEstudios" name="gradoEstudios" />
+							</div>
+						</td>
+				</tr>
+				<tr>
+					<td>
+						<div>
+							<label for="estadoCivil">Estado Civil</label>
+							<select>
+								<optgroup>
+									<option>Soltero</option>
+									<option>Casado</option>
+									<option>Divorciado</option>
+									<option>Viudo</option>
+									<option>Otro</option>
+								</optgroup>
+							</select>	
+						</div>
+						<td>
+							<div>
+								<label for="tipoSangre">Tipo de sangre</label>
+								<input type="text" id="tipoSangre" name="tipoSangre" />
+							</div>
+						</td>
+				</tr>
+				<tr>
+					<td>
+							<div>
+								<label for="gradoEstudios">Grado de estudios</label>
+								<select>
+									<optgroup>
+										<option>Preescolar</option>
+										<option>Primaria</option>
+										<option>Secundaria</option>
+										<option>Bachillerato general</option>
+										<option>Bachillerato tecnico</option>
+										<option>Sin estudios</option>
+									</optgroup>
+								</select>
+							</div>
+						</td>
+						<td>
+							<div>
+								<label for="carrera">Carrera</label>
+								<input type="text" id="carrera" name="carrera" />
+							</div>
+						</td>
+						<td>
+							<div>
+								<label for="profesion">Profesión</label>
+								<input type="text" id="profesion" name="profesion" />
+							</div>
+						</td>
+						<tr>
+							<td>
+								<div>
+									<label for="trabajaEn">Lugar de trabajo</label>
+									<input type="text" id="trabajaEn" name="trabajaEn" />
+								</div>
+							</td>
+							<td>
+								<div>
+									<label for="referenciadoPor">Referenciado por</label>
+									<input type="text" id="referenciadoPor" name="referenciadoPor" />
+								</div>
+							</td>
+							<td>
+								<div>
+									<label for="tipoMotivoAfiliacion">Motivo afiliación</label>
+									<select>
+										<optgroup>
+							
+										</optgroup>
+									</select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<div>
+									<label for="status">Status</label>
+									<select>
+										<optgroup>
+						
+										</optgroup>
+									</select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<div>
+									<label for="solicitud">Solicitud</label>
+									<input type="file" id="solicitud" name="solicitud" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type = "submit" value ="Registrar Ciudadano" />
+							</td>
+							<td>
+								<input  type ="reset" value = "Borrar Campos" />
+							</td>
+						</tr>
+			</tbody>
+	
+		</table>
+	</form>
+
+
+</body>
+</html>

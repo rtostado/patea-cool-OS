@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> </title>
+<style type="text/css">
+	@import url('aplicacion/Zapopan.css');
+</style>
+<table style="color:white;">
+	<tr>
+		<td for="usuario"> <label>Usuario:</label> </td>
+		<td><input type="text" id="usuario" name="usuario" placeholder="usuario"></td>
+		<td for="pass"> <label>Password:</label> </td>
+		<td><input type="password" id="pass" name="pass" placeholder="contraseña"></td>
+	</tr>
+</table>
+</head>
+<body>	
+	<header id="cabeza">
+		<h1>
+			<a href="" style="color:blue;">
+				<img id="logoPrincipal" alt="Yo tambien soy zapopan" src="../Imagenes/Logo_Yo_tambien_soy_zapopan.png" />
+			</a>
+		</h1> 
+		<nav>
+			<ul id="navPrincipal">
+				<li class="navNoticias">
+					<a href="" style="color:#4C668C;">Noticias</a>
+				</li>
+				<li class="navEventos">
+					<a href="" style="color:#4C668C;">Eventos</a>
+				</li>
+				<li class="navCalendario">
+					<a href="" style="color:#4C668C;">Calendario</a>
+				</li>
+				<li class="navRegistros">
+					<a href="RegistroEleccion.html" style="color:#4C668C;">Registros</a>
+				</li>
+				<li class="navContacto">
+					<a href="" style="color:#4C668C;">Contacto</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+<aside id="ladoIzquierdo" class="areasLaterales" style="display: none">
+	</aside>
+	<aside id="ladoDerecho" class="areasLaterales" style="display: none">
+	</aside>
+	<form method = "post">
+		<table>
+			<caption><h1>Registro de Accion Social </h1></caption>
+			<tbody>
+				<tr>
+					<td >
+						<label for ="nombre"> Nombre: </label>
+					</td>
+					<td colspan ="3" >
+						<input type ="text" required id="nombre" name ="nombre" placeholder = "Nombre de la Accion social" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for ="fechaInicio"> Fecha Inicio</label>
+					</td>
+					<td>
+						<input type ="date" required id="fechaInicio" name="fechaInicio" placeholder ="seleccione una fecha" />
+					</td>
+					<td>
+						<label for ="fechaFin"> Fecha Fin</label>
+					</td>
+					<td>
+						<input type ="date" id="fechaFin" name="fechaFin" placeholder ="seleccione una fecha" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for ="descripcion"> Descripcion</label>
+					</td>
+					<td colspan ="3" >
+						<textarea name="descripcion" required  id = "descripcion" cols="50" rows="5" placeholder = "En que consiste la accion social"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for ="calificacion"> Calificacion </label>
+					</td>
+					<td>
+						<select name ="calificacion" id ="calificacion">
+								<optgroup>
+									<option>0</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>
+									<option>10</option>
+								</optgroup>
+							</select>
+					</td>
+					<td>
+						<label for="numParticipantes"> Numero de Participantes</label>
+					</td>
+					<td>
+						<input type ="number" id="numParticipantes" name ="numParticipantes" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="tipoAccionSociual_id"> Tipo de Accion social</label>
+					</td>
+					<td>
+						<input type ="number" id="tipoAccionSociual_id" name ="tipoAccionSociual_id" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type = "submit" value ="Registrar Accion Social" />
+					</td>
+					<td>
+						<input  type ="reset" value = "Borrar Campos" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
